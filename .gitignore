@@ -1,2 +1,5 @@
 SDL2/
 build/
+*.exe
+*.dll
+json.hpp
