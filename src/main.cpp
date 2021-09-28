@@ -1,6 +1,6 @@
-#include "game.hpp"
+#include "Game.hpp"
 
-#define FPS 120
+#define FPS 60
 #define FRAME_DELAY 1000 / FPS
 
 int main(int argc, char *argv[]) {
@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 	Uint32 frame_start;
 	int frame_time;
 
-	Game game("Touhou Engine", 1920, 1080);
+	Game game("Touhou Engine", 1280, 720);
 
 	while (game.running()) {
 		frame_start = SDL_GetTicks();

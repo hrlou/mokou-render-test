@@ -1,6 +1,7 @@
-#include "game.hpp"
+#include "Game.hpp"
 
 SDL_Texture* TestTexture;
+auto MokouSprite = SpriteManager("./assets/mokou_sheet.json");
 // std::vector<SDL_Texture*> Textures;
 
 Game::Game(const char* title, int w, int h) {
@@ -9,7 +10,7 @@ Game::Game(const char* title, int w, int h) {
 	Running = true;
 
 	// Test Texture
-	SDL_Surface* tmp = IMG_Load("assets/mokou_sheet.png");
+	SDL_Surface* tmp = IMG_Load("assets/kokoro_sheet.png");
 	SDL_SetColorKey(tmp, SDL_TRUE, SDL_MapRGB(tmp->format, 147, 187, 236));
 	TestTexture = SDL_CreateTextureFromSurface(Renderer, tmp);
 	// Textures[1] = SDL_CreateTextureFromSurface(Renderer, tmp);
@@ -42,10 +43,9 @@ void Game::update() {
 }
 
 void Game::render() {
-	// Sprite intro(0, 11, 256, 256, 9, 1);
-	Sprite idle(0, 277, 256, 256, 13, 1);
-	SDL_Rect src_rect = idle.rect(SDL_GetTicks());
-	SDL_Rect dst_rect = {0, 0, 512, 512};
+	// SDL_Rect src_rect = MokouSprite.get("idle").rect(SDL_GetTicks());
+	SDL_Rect src_rect = Sprite(0, 11, 256, 256, 19, 1).rect(SDL_GetTicks());
+	SDL_Rect dst_rect = {100, 100, src_rect.w * 2, src_rect.h * 2};
 	SDL_RenderClear(Renderer);
 	SDL_RenderCopy(Renderer, TestTexture, &src_rect, &dst_rect);
 	SDL_RenderPresent(Renderer);

@@ -1,3 +1,9 @@
 {
-	"name":"mokou_sheet"
+	"name":"mokou_sheet",
+	"color_key":{"r":147, "g":187, "b":236},
+	"sprites":[
+		{"name":"intro", "x":0, "y":11, "width":256, "height":256, "frames":9, "border":1},
+		{"name":"idle", "x":0, "y":277, "width":256, "height":256, "frames":13, "border":1},
+		{"name":"mamizou", "x":2313, "y":59, "width":144, "height":192, "frames":6, "border":1}
+	]
 }

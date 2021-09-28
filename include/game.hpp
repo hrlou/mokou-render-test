@@ -3,13 +3,13 @@
 #include <cstdlib>
 
 #include <iostream>
-#include <vector>
-#include <memory>
+// #include <vector>
+// #include <memory>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "sprites.hpp"
+#include "SpriteManager.hpp"
 
 class Game {
 public:
