@@ -1,6 +1,4 @@
 SDL2/
-release/
-build/
-*.exe
-*.dll
+bin/
+obj/
 json.hpp

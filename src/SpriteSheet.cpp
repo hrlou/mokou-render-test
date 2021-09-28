@@ -1,11 +1,11 @@
-#include "SpriteManager.hpp"
+#include "SpriteSheet.hpp"
 #include "json.hpp"
 
 #include <iostream>
 #include <fstream>
 #include <map>
 
-SpriteManager::SpriteManager(const std::string sheet) {
+SpriteSheet::SpriteSheet(const std::string sheet) {
 	std::ifstream i(sheet);
 	nlohmann::json j;
 	i >> j;
@@ -16,6 +16,6 @@ SpriteManager::SpriteManager(const std::string sheet) {
 	}
 }
 
-Sprite SpriteManager::get(const std::string name) {
+Sprite SpriteSheet::get(const std::string name) {
 	return Map[name];
 }

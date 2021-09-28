@@ -3,9 +3,9 @@
 #include <map>
 #include <string>
 
-class SpriteManager {
+class SpriteSheet {
 public:
-	SpriteManager(const std::string sheet);
+	SpriteSheet(const std::string sheet);
 	Sprite get(const std::string name);
 private:
 	std::map<std::string, Sprite> Map;

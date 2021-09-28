@@ -1,0 +1,7 @@
+{
+	"name":"reimu_sheet",
+	"color_key":{"r":147, "g":187, "b":236},
+	"sprites":[
+		{"name":"idle", "x":1239, "y":348, "width":192, "height":192, "frames":14, "border":1}
+	]
+}

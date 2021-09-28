@@ -1,31 +1,34 @@
 #pragma once
 
 #include <cstdlib>
-
 #include <iostream>
-// #include <vector>
-// #include <memory>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "SpriteManager.hpp"
+#include "SpriteSheet.hpp"
 
 class Game {
 public:
-	Game(const char* title, int w, int h);
-	~Game();
+	static Game* Instance() {
+		if (!s_pInstance) {
+			s_pInstance = new Game();
+		}
+		return s_pInstance;
+	}
 	// Game Loop Functions
-	void handle_events();
-	void update();
-	void render();
-	void clean();
+	void init(const char* title, int w, int h);
+	void handle_events(void);
+	void update(void);
+	void render(void);
+	void clean(void);
 
-	inline bool running() { return Running; }
+	inline bool running() { return m_running; }
 private:
- 	SDL_Window* Window;
- 	SDL_Renderer* Renderer;
+	static Game* s_pInstance;
 
- 	bool Running;
- 	size_t Cycles;
+ 	SDL_Window* m_pWindow = nullptr;
+ 	SDL_Renderer* m_pRenderer = nullptr;
+
+ 	bool m_running = false;
 };
