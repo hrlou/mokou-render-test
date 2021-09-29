@@ -5,7 +5,7 @@
 #include <fstream>
 #include <map>
 
-Texture::Texture(const std::string texture, SDL_Renderer* pRenderer) {
+Texture::Texture(SDL_Renderer* pRenderer, const std::string texture) {
 	SDL_Surface* pTempSurface = IMG_Load(texture.c_str());
 	m_pTexture = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
 	SDL_FreeSurface(pTempSurface);
@@ -15,7 +15,7 @@ Texture::~Texture(void) {
 	SDL_DestroyTexture(m_pTexture);
 }
 
-TextureSheet::TextureSheet(const std::string texture, const std::string sheet, SDL_Renderer* pRenderer) {
+TextureSheet::TextureSheet(SDL_Renderer* pRenderer, const std::string texture, const std::string sheet) {
 	nlohmann::json json;
 	std::ifstream(sheet) >> json;
 	for (auto a : json["sprites"]) {
@@ -33,13 +33,3 @@ TextureSheet::TextureSheet(const std::string texture, const std::string sheet, S
 Sprite TextureSheet::sprite(const std::string id) {
 	return m_Sprites[id];
 }
-
-/*SpriteSheet::SpriteSheet(const std::string sheet) {
-
-}
-
-SDL_Rect SpriteSheet::get(const std::string name, int frame) {
-	return Map[name].frame(frame);
-}
-
-*/

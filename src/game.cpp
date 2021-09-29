@@ -11,8 +11,9 @@ void Game::init(const char* title, int w, int h) {
 		m_running = true;
 	}
 	SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
-	TextureManager::Instance()->load("hakurei_shrine", "./assets/backgrounds/hakurei_shrine.png", m_pRenderer);
-	TextureManager::Instance()->load("mokou", "./assets/mokou_sheet.png", "./assets/mokou_sheet.json", m_pRenderer);
+	TextureManager::Instance()->load(m_pRenderer, "hakurei_shrine", "./assets/backgrounds/hakurei_shrine.png");
+	TextureManager::Instance()->load(m_pRenderer, "mokou", "./assets/mokou_sheet.png", "./assets/mokou_sheet.json");
+	TextureManager::Instance()->load(m_pRenderer, "reimu", "./assets/reimu_sheet.png", "./assets/reimu_sheet.json");
 }
 
 void Game::handle_events(void) {
@@ -34,12 +35,16 @@ void Game::update(void) {
 
 void Game::render(void) {
 	SDL_RenderClear(m_pRenderer);
-	TextureManager::Instance()->draw("hakurei_shrine", 0, 0, 1280, 720, m_pRenderer);
-	TextureManager::Instance()->draw_frame("mokou", "idle", (SDL_GetTicks() / 100) % 13, 0, 0, 512, 512, m_pRenderer);
+	std::pair<int, int> res;
+	SDL_GetWindowSize(m_pWindow, &res.first, &res.second);
+	TextureManager::Instance()->draw(m_pRenderer, "hakurei_shrine", 0, 0, 1280, 720);
+	TextureManager::Instance()->draw_frame(m_pRenderer, "mokou", "idle", (SDL_GetTicks() / 100) % 13, 0, 0, 256, 256);
+	TextureManager::Instance()->draw_frame(m_pRenderer, "reimu", "idle", (SDL_GetTicks() / 100) % 13, 200, 40, 192, 192, SDL_FLIP_HORIZONTAL);
 	SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::clean(void) {
+	std::cerr << "[Game] Cleaning" << std::endl;
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();

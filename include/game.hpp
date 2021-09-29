@@ -12,8 +12,8 @@ class Game {
 public:
 	static Game* Instance() {
 		if (!s_pInstance) {
-			std::cerr << "[Game] Initialised" << std::endl;
 			s_pInstance = new Game();
+			std::cerr << "[Game] Initialised" << std::endl;
 		}
 		return s_pInstance;
 	}
