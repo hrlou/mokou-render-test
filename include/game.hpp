@@ -6,7 +6,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "SpriteSheet.hpp"
+#include "TextureManager.hpp"
 
 class Game {
 public:

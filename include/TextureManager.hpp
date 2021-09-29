@@ -7,8 +7,8 @@
 #include <string>
 #include <map>
 
-#include "SpriteSheet.hpp"
-/*
+#include "Texture.hpp"
+
 class TextureManager {
 public:
 	static TextureManager* Instance() {
@@ -17,14 +17,12 @@ public:
 		}
 		return s_pInstance;
 	}
-	void load(std::string, SDL_Renderer*, const std::string, const std::string);
-	void draw (string id, int x, int y, int width, int height,
-	           SDL_Renderer* pRenderer, SDL_RendererFlip = SDL_FLIP_NONE); //draw the static image.
-
-	void drawFrame(string id, int x, int y, int width, int height,
-	               int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE); //draw image sprite
-
-	void clearFromTextureMap(string id);
+	void load(const std::string id, const std::string texture, SDL_Renderer* pRenderer);
+	void draw(const std::string id, int x, int y, int w, int h, SDL_Renderer* pRenderer, SDL_RendererFlip = SDL_FLIP_NONE);
+	void draw_frame(const std::string id, const std::string sprite, int frame, int x, int y, int w, int h, SDL_Renderer* pRenderer, SDL_RendererFlip = SDL_FLIP_NONE);
+	// void clearFromTextureMap(string id);
 private:
 	static TextureManager* s_pInstance;
-};*/
+
+	std::map<std::string, Texture> m_TextureMap; 
+};

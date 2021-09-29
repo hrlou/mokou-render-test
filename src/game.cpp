@@ -1,10 +1,11 @@
 #include "Game.hpp"
+#include "TextureManager.hpp"
 
 Game* Game::s_pInstance = nullptr;
 
-SDL_Texture* Mokou;
+/*SDL_Texture* Mokou;
 SDL_Texture* Background;
-auto MokouSheet = SpriteSheet("./assets/mokou_sheet.json");
+auto MokouSheet = SpriteSheet("./assets/mokou_sheet.json");*/
 
 void Game::init(const char* title, int w, int h) {
 	// check 
@@ -15,9 +16,9 @@ void Game::init(const char* title, int w, int h) {
 		m_running = true;
 	}
 	SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
+	TextureManager::Instance()->load("mokou", "./assets/mokou_sheet.png", m_pRenderer);
 
-
-	// Mokou
+	/* Mokou
 	SDL_Surface* tmp = IMG_Load("./assets/mokou_sheet.png");
 	SDL_SetColorKey(tmp, SDL_TRUE, SDL_MapRGB(tmp->format, 147, 187, 236));
 	Mokou = SDL_CreateTextureFromSurface(m_pRenderer, tmp);
@@ -26,6 +27,7 @@ void Game::init(const char* title, int w, int h) {
 	tmp = IMG_Load("./assets/backgrounds/hakurei_shrine.png");
 	Background = SDL_CreateTextureFromSurface(m_pRenderer, tmp);
 	SDL_FreeSurface(tmp);
+	*/
 }
 
 void Game::handle_events(void) {
@@ -46,17 +48,19 @@ void Game::update(void) {
 }
 
 void Game::render(void) {
+	SDL_RenderClear(m_pRenderer);
+	TextureManager::Instance()->draw_frame("mokou", "idle", (SDL_GetTicks() / 100) % 13, 10, 10, 512, 512, m_pRenderer);
+	/*
+	SDL_RenderCopy(m_pRenderer, Background, NULL, NULL);
 	SDL_Rect mokou_src_rect = MokouSheet.get("idle").rect(SDL_GetTicks());
 	SDL_Rect mokou_dst_rect = {100, 100, mokou_src_rect.w * 2, mokou_src_rect.w * 2};
-	SDL_RenderClear(m_pRenderer);
-	SDL_RenderCopy(m_pRenderer, Background, NULL, NULL);
 	SDL_RenderCopyEx(m_pRenderer, Mokou, &mokou_src_rect, &mokou_dst_rect, 0, NULL, SDL_FLIP_NONE);
-	// SDL_RenderCopy(m_pRenderer, Mokou, &src_rect, &dst_rect);
+	// SDL_RenderCopy(m_pRenderer, Mokou, &src_rect, &dst_rect);*/
 	SDL_RenderPresent(m_pRenderer);
 }
 
 void Game::clean(void) {
-	SDL_DestroyTexture(Mokou);
+	// SDL_DestroyTexture(Mokou);
 
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
