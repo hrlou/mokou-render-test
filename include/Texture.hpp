@@ -1,38 +1,43 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
+#include <iostream>
 #include <map>
 #include <string>
 
 class Sprite {
 public:	
 	Sprite(void) {}
-	Sprite(int _x, int _y, int _width, int _height, int _frames, int _border)
-		: x(_x), y(_y), width(_width), height(_height), frames(_frames), border(_border) {}
+	Sprite(int x, int y, int w, int h, int frames, int border)
+		: m_x(x), m_y(y), m_w(w), m_h(h), m_frames(frames), m_border(border) {}
 	inline SDL_Rect frame(int frame) {
-		SDL_Rect r = {x + border + (frame * width) + (border * frame), (y + border), width, height};
+		SDL_Rect r = {m_x + m_border + (frame * m_w) + (m_border * frame), (m_y + m_border), m_w, m_h};
 		return r;
 	}
-	int x, y, width, height, frames, border;
-};
-
-class SpriteSheet {
-public:
-	SpriteSheet(void) {}
-	SpriteSheet(const std::string sheet);
-	SDL_Rect get(const std::string name, int frame = 0);
+	SDL_Rect operator[](int i) { return frame(i); }
 private:
-	std::map<std::string, Sprite> Map;
+	int m_x, m_y, m_w, m_h, m_frames, m_border;
 };
 
 class Texture {
 public:
 	Texture(void) {}
+	~Texture(void);
 	Texture(const std::string texture, SDL_Renderer* pRenderer);
 	SDL_Texture* texture(void) { return m_pTexture; }
-	SpriteSheet sheet(void) { return m_SpriteSheet; }
-private:
+	virtual bool is_sheet(void) { return false; }
+protected:
 	SDL_Texture* m_pTexture;
-	SpriteSheet m_SpriteSheet;
-	bool m_HasSheet;
+};
+
+class TextureSheet : public Texture {
+public:
+	TextureSheet(void) {}
+	TextureSheet(const std::string texture, const std::string sheet, SDL_Renderer* pRenderer);
+	Sprite sprite(const std::string id);
+	bool is_sheet(void) { return true; }
+	Sprite operator[](const std::string id) { return sprite(id); }
+private:
+	std::map<std::string, Sprite> m_Sprites;
 };

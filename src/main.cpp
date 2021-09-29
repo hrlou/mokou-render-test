@@ -1,12 +1,13 @@
 #include "Game.hpp"
 
-#define FPS 30
+#define FPS 60
 #define FRAME_DELAY 1000 / FPS
 
 int main(int argc, char *argv[]) {
-	SDL_Init(SDL_INIT_EVERYTHING);
-    IMG_Init(IMG_INIT_PNG);
-
+	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
+		std::cerr << "[SDL] Initialised" << std::endl;
+	}
+	IMG_Init(IMG_INIT_PNG);
 	Uint32 frame_start;
 	int frame_time;
 	
