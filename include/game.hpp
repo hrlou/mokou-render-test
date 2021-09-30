@@ -18,7 +18,7 @@ public:
 		return s_pInstance;
 	}
 	// Game Loop Functions
-	void init(const char* title, int w, int h);
+	void init(const char* title, int w, int h, Uint32 flags);
 	void handle_events(void);
 	void update(void);
 	void render(void);

@@ -23,10 +23,9 @@ private:
 class Texture {
 public:
 	Texture(void) {}
-	~Texture(void);
+	virtual ~Texture(void);
 	Texture(SDL_Renderer* pRenderer, const std::string texture);
 	SDL_Texture* texture(void) { return m_pTexture; }
-	virtual bool is_sheet(void) { return false; }
 protected:
 	SDL_Texture* m_pTexture;
 };
@@ -36,7 +35,6 @@ public:
 	TextureSheet(void) {}
 	TextureSheet(SDL_Renderer* pRenderer, const std::string texture, const std::string sheet);
 	Sprite sprite(const std::string id);
-	bool is_sheet(void) { return true; }
 	Sprite operator[](const std::string id) { return sprite(id); }
 private:
 	std::map<std::string, Sprite> m_Sprites;
