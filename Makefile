@@ -1,13 +1,13 @@
-CXX=x86_64-w64-mingw32-g++
-CXXFLAGS=-std=c++17 -pipe -pedantic -O3 -Wall
+ABI=x86_64
+CXX=$(ABI)-w64-mingw32-g++
+CXXFLAGS=-std=c++17 -pipe -pedantic -O2 -Wall
 PREFIX=/usr/local
-INCLUDE=-L./SDL2/lib -I./SDL2/include -I./include -I./
+INCLUDE=-L./SDL2/$(ABI)/lib -I./SDL2/$(ABI)/include -I./include -I./
 LDFLAGS=-static-libstdc++ -static-libgcc -lmingw32 -lSDL2main -lSDL2 -lSDL2_image
-
 
 BIN_DIR=./bin
 OBJ_DIR=./obj
-DLL_DIR=./SDL2/bin
+DLL_DIR=./SDL2/$(ABI)/bin
 
 BIN=touhou.exe
 DLL=SDL2.dll SDL2_image.dll zlib1.dll libpng16-16.dll
