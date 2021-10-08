@@ -1,13 +1,14 @@
 #include "Game.hpp"
+#include "Vector2D.hpp"
 
 #define FPS 60
 #define FRAME_DELAY 1000 / FPS
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 		std::cerr << "[SDL] Initialised" << std::endl;
 	}
-	if (IMG_Init(IMG_INIT_PNG) == 0) {
+	if (IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == 0) {
 		std::cerr << "[SDL] Image Initialised" << std::endl;
 	}
 	Uint32 frame_start;

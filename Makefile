@@ -1,6 +1,6 @@
 ABI=x86_64
 CXX=$(ABI)-w64-mingw32-g++
-CXXFLAGS=-std=c++17 -pipe -pedantic -O2 -Wall
+CXXFLAGS=-std=c++17 -pipe -pedantic -O2 -Wall -Wl,-subsystem,console
 PREFIX=/usr/local
 INCLUDE=-L./SDL2/$(ABI)/lib -I./SDL2/$(ABI)/include -I./include -I./
 LDFLAGS=-static-libstdc++ -static-libgcc -lmingw32 -lSDL2main -lSDL2 -lSDL2_image

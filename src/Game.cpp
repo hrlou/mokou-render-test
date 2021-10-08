@@ -10,14 +10,12 @@ void Game::init(const char* title, int w, int h, Uint32 flags) {
 		m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 		m_running = true;
 	}
-	// SDL_SetRenderDrawColor(m_pRenderer, 255, 255, 255, 255);
-	TextureManager::Instance()->load(m_pRenderer, "mokou", "assets/mokou_sheet.png", "assets/mokou_sheet.json");
 	TextureManager::Instance()->load(m_pRenderer, "hakurei_shrine", "assets/backgrounds/hakurei_shrine.png");
-	// TextureManager::Instance()->load(m_pRenderer, "reimu", "./assets/reimu_sheet.png", "./assets/reimu_sheet.json");
+	TextureManager::Instance()->load(m_pRenderer, "mokou", "assets/mokou_sheet.png", "assets/mokou_sheet.json");
 }
 
 void Game::handle_events(void) {
-	SDL_Event event;
+	SDL_Event event;	
 	SDL_PollEvent(&event);
 
 	switch (event.type) {

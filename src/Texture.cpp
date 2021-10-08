@@ -5,9 +5,17 @@
 #include <fstream>
 #include <map>
 
+// inline SDL_Surface*
+
 Texture::Texture(SDL_Renderer* pRenderer, const std::string texture) {
 	SDL_Surface* pTempSurface = IMG_Load(texture.c_str());
+	if (pTempSurface == nullptr) {
+		std::cerr << "[Texture] Failed to create surface \"" << texture << "\": " << IMG_GetError() << std::endl; 
+	}
 	m_pTexture = SDL_CreateTextureFromSurface(pRenderer, pTempSurface);
+	if (m_pTexture == nullptr) {
+		std::cerr << "[Texture] Failed to create texture \"" << texture << "\": " << IMG_GetError() << std::endl; 
+	}
 	SDL_FreeSurface(pTempSurface);
 }
 
@@ -18,8 +26,12 @@ Texture::~Texture(void) {
 TextureSheet::TextureSheet(SDL_Renderer* pRenderer, const std::string texture, const std::string sheet) {
 	nlohmann::json json;
 	std::ifstream(sheet) >> json;
+	int border = 0;
+	if (json.contains("border")) {
+		border = json["border"];
+	}
 	for (auto a : json["sprites"]) {
-		auto s = Sprite(a["x"], a["y"], a["width"], a["height"], a["frames"], a["border"]);
+		auto s = Sprite(a["x"], a["y"], a["width"], a["height"], a["frames"], border);
 		m_Sprites[a["name"]] = s;
 	}
 	SDL_Surface* pTempSurface = IMG_Load(texture.c_str());
